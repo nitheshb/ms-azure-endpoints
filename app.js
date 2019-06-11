@@ -40,14 +40,15 @@ app.get('/test', async(req, res)=> {
   res.send("hello");
 });
 app.get('/getMatches', taskList.showMyGames.bind(taskList))
-app.post('/addtask', taskList.addTask.bind(taskList));
+app.post('/addtask', taskList.addFantasyTeam.bind(taskList));
 app.post('/completetask', taskList.completeTask.bind(taskList));
 app.set('view engine', 'jade');
 
 
-// save the teams
-
-// fetch the teams
+// save/add the teams
+app.post('/addFanTeam', taskList.addFantasyTeam.bind(taskList));
+// fetch the teams of individual or all ie.,based on filter
+app.post('/getFanTeams', taskList.completeTask.bind(taskList));
 
 // fetch the live score and save
 

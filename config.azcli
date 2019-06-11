@@ -1,0 +1,33 @@
+# az login
+# az group create --name cosmoFull --location southindia
+# az appservice plan create --g cosmoFull -n MyPlan
+# az webapp create --name cosmoFull --plan cosmoFull --runtime "node|8.8"
+
+gitrepo="https://github.com/nitheshb/ms-azure-endpoints.git"
+
+
+# Create a resource group.
+az group create --location southindia --name myResourceGroup
+
+# Create an App Service plan in STANDARD tier (minimum required by deployment slots).
+az appservice plan create --name ms-azure-endpoints --resource-group myResourceGroup --sku S1
+
+# Create a web app.
+az webapp create --name ms-azure-endpoints --resource-group myResourceGroup --plan ms-azure-endpoints
+
+#Create a deployment slot with the name "staging".
+az webapp deployment slot create --name ms-azure-endpoints --resource-group myResourceGroup --slot staging
+
+az webapp config appsettings set --resource-group myResourceGroup --name ms-azure-endpoints --settings WEBSITE_NODE_DEFAULT_VERSION=10.14.1 --slot staging
+
+# Deploy sample code to "staging" slot from GitHub.
+az webapp deployment source config --name ms-azure-endpoints --resource-group myResourceGroup --slot staging --repo-url https://github.com/nitheshb/ms-azure-endpoints.git --branch master --manual-integration
+
+# Copy the result of the following command into a browser to see the staging slot.
+echo http://ms-azure-endpoints-staging.azurewebsites.net
+
+# Swap the verified/warmed up staging slot into production.
+az webapp deployment slot swap --name ms-azure-endpoints --resource-group myResourceGroup --slot staging
+
+# Copy the result of the following command into a browser to see the web app in the production slot.
+echo http://ms-azure-endpoints.azurewebsites.net

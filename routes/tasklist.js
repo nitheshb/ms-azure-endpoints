@@ -64,10 +64,30 @@ TaskList.prototype = {
             res.redirect('/');
         });
     },
+    addFantasyTeam: function (req, res) {
+        // this will put the user saved fantasy team under the choosed fixture
+        var self = this;
+        var item = req.body;
+        // user should send the below details in body
+
+        // uid
+        // team : []
+        // cur_points: 0
+
+        console.log("posted by user fantasy team", item);
+        self.taskDao.addItem(item, function (err) {
+            if (err) {
+                throw (err);
+            }
+
+            res.redirect('/');
+        });
+    },
 
     completeTask: function (req, res) {
         var self = this;
         var completedTasks = Object.keys(req.body);
+
 
         async.forEach(completedTasks, function taskIterator(completedTask, callback) {
             self.taskDao.updateItem(completedTask, function (err) {
