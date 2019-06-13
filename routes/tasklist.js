@@ -81,7 +81,7 @@ TaskList.prototype = {
                // res.status(500).send({ error: err });
             }
             console.log("added item is", item);
-            res.status(200).send(item);
+            res.status(200).send(item.id);
             
         });
     },
