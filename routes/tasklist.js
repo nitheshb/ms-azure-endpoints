@@ -78,10 +78,10 @@ TaskList.prototype = {
         self.taskDao.addItem(item, function (err) {
             if (err) {
                 throw (err);
-                // res.status(500).send({ error: err });
+               // res.status(500).send({ error: err });
             }
             console.log("added item is", item);
-            res.status(200).send({ data: item.id });
+            res.status(200).send(item);
             
         });
     },
