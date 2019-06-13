@@ -79,8 +79,9 @@ TaskList.prototype = {
             if (err) {
                 throw (err);
             }
-
-            res.redirect('/');
+            console.log("added item is", item);
+            res.json(item.id);
+            
         });
     },
 
