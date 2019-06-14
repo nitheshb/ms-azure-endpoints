@@ -31,12 +31,12 @@ TaskList.prototype = {
     },
     showMyGames: function (req, res) {
         var self = this;
-
+        var item = req.body;
         var querySpec = {
-            query: 'SELECT * FROM root r',
+            query: 'SELECT * FROM Items r WHERE r.uid=@completed',
             parameters: [{
                 name: '@completed',
-                value: false
+                value: "RZPb7QnqiyWo5Z3ac3kmKrPeAv42"
             }]
         };
 

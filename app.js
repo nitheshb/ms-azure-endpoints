@@ -48,7 +48,7 @@ app.set('view engine', 'jade');
 // save/add the teams
 app.post('/addFanTeam', taskList.addFantasyTeam.bind(taskList));
 // fetch the teams of individual or all ie.,based on filter
-app.get('/getFanTeams', taskList.showMyGames.bind(taskList));
+app.post('/getFanTeams', taskList.showMyGames.bind(taskList));
 
 // fetch the live score and save
 
